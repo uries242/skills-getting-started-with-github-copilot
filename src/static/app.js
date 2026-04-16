@@ -84,6 +84,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const email = document.getElementById("email").value;
     const activity = document.getElementById("activity").value;
+    const submitButton = signupForm.querySelector('button[type="submit"]');
+
+    // Disable button to prevent duplicate submissions
+    submitButton.disabled = true;
 
     try {
       const response = await fetch(
@@ -118,6 +122,9 @@ document.addEventListener("DOMContentLoaded", () => {
       messageDiv.className = "error";
       messageDiv.classList.remove("hidden");
       console.error("Error signing up:", error);
+    } finally {
+      // Re-enable button after request completes
+      submitButton.disabled = false;
     }
   });
 
